@@ -3,362 +3,347 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AZMIR FOOD | Modern Dining</title>
+    <title>Apex Market | Enterprise Supershop</title>
+    <!-- Tailwind CSS Engine for Clean Premium UI Frameworks -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* --- Modern Reset & Variables --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        :root {
-            --bg-dark: #0b0c10;
-            --bg-card: #1f2833;
-            --accent-gold: #c5a880;
-            --text-light: #c5a880;
-            --text-white: #ffffff;
-            --text-gray: #a9b7c6;
-        }
-
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+        
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-white);
-            overflow-x: hidden;
-            scroll-behavior: smooth;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc;
         }
-
-        /* --- Hero Section --- */
-        header {
-            height: 100vh;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(11,12,16,1)), 
-                        url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+        /* Glassmorphism Navigation Overlay */
+        .premium-nav {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
         }
-
-        .hero-content {
-            max-width: 800px;
-            padding: 20px;
-            animation: fadeIn 1.5s ease-out;
+        /* Smooth Scale Micro-interactions */
+        .product-card {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
-        .hero-content h1 {
-            font-size: 4rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-            color: var(--text-white);
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.08);
         }
-
-        .hero-content h1 span {
-            color: var(--accent-gold);
-        }
-
-        .hero-content p {
-            font-size: 1.2rem;
-            color: var(--text-gray);
-            margin-bottom: 30px;
-            line-height: 1.6;
-        }
-
-        .cta-btn {
-            display: inline-block;
-            padding: 12px 35px;
-            background-color: transparent;
-            color: var(--accent-gold);
-            border: 2px solid var(--accent-gold);
-            text-decoration: none;
-            font-weight: bold;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            border-radius: 30px;
-        }
-
-        .cta-btn:hover {
-            background-color: var(--accent-gold);
-            color: var(--bg-dark);
-            box-shadow: 0 0 15px var(--accent-gold);
-            transform: translateY(-3px);
-        }
-
-        /* --- Menu Section --- */
-        .menu-section {
-            padding: 100px 4% 50px 4%;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            letter-spacing: 1px;
-            position: relative;
-            display: inline-block;
-            padding-bottom: 10px;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 25%;
-            width: 50%;
-            height: 2px;
-            background-color: var(--accent-gold);
-        }
-
-        /* Menu Grid Grid Setup */
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
-        /* Food Card Styling */
-        .food-card {
-            background-color: var(--bg-card);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-            transition: all 0.4s ease;
-            opacity: 0;
-            transform: translateY(40px);
-        }
-
-        /* Class added by JS when scrolled into view */
-        .food-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .food-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 15px 30px rgba(197, 168, 128, 0.2);
-        }
-
-        .food-img-container {
-            height: 200px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .food-img-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .food-card:hover .food-img-container img {
-            transform: scale(1.1);
-        }
-
-        .food-info {
-            padding: 20px;
-        }
-
-        .food-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .food-name {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--text-white);
-        }
-
-        .food-price {
-            color: var(--accent-gold);
-            font-weight: bold;
-            font-size: 1.1rem;
-            background: rgba(197, 168, 128, 0.1);
-            padding: 3px 10px;
-            border-radius: 10px;
-        }
-
-        .food-desc {
-            font-size: 0.9rem;
-            color: var(--text-gray);
-            line-height: 1.5;
-        }
-
-        /* --- Contact / Footer Section --- */
-        footer {
-            background: linear-gradient(rgba(11,12,16,0.9), rgba(0,0,0,1)), 
-                        url('https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
-            padding: 80px 20px;
-            text-align: center;
-            border-top: 1px solid rgba(197, 168, 128, 0.2);
-        }
-
-        .contact-container {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .contact-container h3 {
-            font-size: 2.5rem;
-            color: var(--accent-gold);
-            margin-bottom: 15px;
-        }
-
-        .contact-container p {
-            color: var(--text-gray);
-            margin-bottom: 30px;
-            font-size: 1.1rem;
-        }
-
-        .phone-number {
-            display: inline-block;
-            font-size: 2rem;
-            color: var(--text-white);
-            text-decoration: none;
-            font-weight: bold;
-            letter-spacing: 1px;
-            transition: color 0.3s ease;
-            border: 2px dashed var(--accent-gold);
-            padding: 15px 30px;
-            border-radius: 10px;
-        }
-
-        .phone-number:hover {
-            color: var(--accent-gold);
-            background-color: rgba(197, 168, 128, 0.05);
-        }
-
-        .footer-credits {
-            margin-top: 50px;
-            font-size: 0.8rem;
-            color: #4f5d73;
-        }
-
-        /* --- Animations & Responsive --- */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @media (max-width: 768px) {
-            .hero-content h1 { font-size: 2.8rem; }
-            .phone-number { font-size: 1.5rem; padding: 10px 20px; }
-        }
+        /* Custom Premium Hide Scrollbar utility */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body>
+<body class="text-slate-800 antialiased">
 
-    <!-- Hero / Intro Section -->
-    <header id="home">
-        <div class="hero-content">
-            <h1>The <span>AZMIR FOODLAND</span></h1>
-            <p>Welcome to a culinary sanctuary where modern flair meets timeless flavor. Every dish tells a story of freshly sourced ingredients, crafted beautifully by culinary artists to feed your soul.</p>
-            <a href="#menu" class="cta-btn">Explore Our Menu</a>
+    <!-- Global Cart Drawer Component -->
+    <div id="cartDrawer" class="fixed inset-y-0 right-0 z-50 w-full max-w-md translate-x-full bg-white shadow-2xl transition-transform duration-500 ease-in-out flex flex-col">
+        <div class="p-6 border-b border-slate-100 flex items-center justify-between">
+            <h3 class="text-xl font-bold text-slate-900">Your Cart (<span id="cartCountGlobal">0</span>)</h3>
+            <button onclick="toggleCart()" class="p-2 text-slate-400 hover:text-slate-600 rounded-full hover:bg-slate-50">✕</button>
+        </div>
+        <div id="cartItemsContainer" class="p-6 overflow-y-auto flex-1 space-y-4 no-scrollbar">
+            <!-- Dynamic Cart Content Rows -->
+        </div>
+        <div class="p-6 border-t border-slate-100 bg-slate-50">
+            <div class="flex justify-between mb-4 text-lg font-bold text-slate-900">
+                <span>Estimated Total:</span>
+                <span id="cartTotalValue">$0.00</span>
+            </div>
+            <button class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-4 rounded-xl shadow-lg shadow-emerald-600/20 transition-all text-center">Proceed to Secure Checkout</button>
+        </div>
+    </div>
+
+    <!-- Navigation Header Matrix -->
+    <nav class="premium-nav fixed top-0 inset-x-0 z-40 border-b border-slate-100 transition-all">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between gap-6">
+            <a href="#" class="text-2xl font-extrabold tracking-tight text-slate-900">APEX<span class="text-emerald-600">MARKET.</span></a>
+            
+            <!-- Realtime Algorithmic Search Engine Bar -->
+            <div class="flex-1 max-w-xl relative">
+                <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">🔍</span>
+                <input type="text" id="searchInput" oninput="executeAlgorithmicSearch()" placeholder="Search through 1,000+ instant superstore items..." class="w-full pl-11 pr-4 py-2.5 bg-slate-100/80 focus:bg-white border border-transparent focus:border-emerald-500 rounded-xl outline-none transition-all text-sm font-medium">
+            </div>
+
+            <div class="flex items-center gap-6">
+                <a href="#contact" class="hidden md:inline-block text-sm font-semibold text-slate-600 hover:text-slate-900 transition-colors">Support Registry</a>
+                <button onclick="toggleCart()" class="relative bg-slate-900 hover:bg-emerald-600 text-white p-3 rounded-xl transition-all shadow-md flex items-center gap-2">
+                    <span>🛒</span>
+                    <span id="cartBadge" class="font-bold text-xs bg-emerald-500 text-white px-2 py-0.5 rounded-full">0</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Cinematic Hero Focus Section -->
+    <header class="pt-32 pb-20 bg-gradient-to-b from-emerald-50/50 to-slate-50 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6">
+                <div class="inline-flex items-center gap-2 bg-emerald-100/60 text-emerald-800 px-3 py-1 rounded-full text-xs font-semibold tracking-wide">
+                    ✨ NEXT-GEN HYPERLOCAL DELIVERY
+                </div>
+                <h1 class="text-5xl md:text-6xl font-black tracking-tight text-slate-900 leading-[1.1]">
+                    Your Whole Superstore, <span class="text-emerald-600">Instantized.</span>
+                </h1>
+                <p class="text-lg text-slate-600 font-medium leading-relaxed">
+                    Explore over 1,000 premium department products cataloged dynamically. From pristine organic groceries to home essentials, sorted seamlessly for smart checkout operations.
+                </p>
+                <div class="pt-2 flex items-center gap-4">
+                    <a href="#catalog" class="bg-slate-900 hover:bg-slate-800 text-white font-semibold px-8 py-4 rounded-xl shadow-lg transition-all transform hover:-translate-y-0.5">Explore 1,000+ Items</a>
+                    <div class="text-left">
+                        <p class="text-2xl font-bold text-slate-900">100%</p>
+                        <p class="text-xs font-medium text-slate-400 uppercase tracking-wider">Freshness Guaranteed</p>
+                    </div>
+                </div>
+            </div>
+            <div class="relative group">
+                <div class="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-3xl blur-2xl opacity-20 group-hover:opacity-30 transition-all duration-700"></div>
+                <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=800&q=80" alt="Apex Store Dashboard Hero" class="relative rounded-2xl shadow-2xl object-cover w-full h-[450px]">
+            </div>
         </div>
     </header>
 
-    <!-- Menu Section (50+ Items Generated via JS) -->
-    <section class="menu-section" id="menu">
-        <div class="section-title">
-            <h2>Our Signature Menu</h2>
+    <!-- Dynamic Inventory Showcase Module -->
+    <main class="max-w-7xl mx-auto px-6 py-16" id="catalog">
+        
+        <!-- Interactive Category Switcher Matrix -->
+        <div class="flex items-center gap-3 overflow-x-auto pb-6 mb-12 no-scrollbar border-b border-slate-100" id="categoryTabs">
+            <button onclick="filterCategory('All')" id="tab-All" class="px-6 py-3 rounded-xl font-semibold text-sm transition-all whitespace-nowrap bg-emerald-600 text-white shadow-lg shadow-emerald-600/10">All Departments (1000+)</button>
+            <button onclick="filterCategory('Produce')" id="tab-Produce" class="px-6 py-3 rounded-xl font-semibold text-sm transition-all whitespace-nowrap bg-white text-slate-600 hover:bg-slate-100">Fresh Produce</button>
+            <button onclick="filterCategory('Bakery')" id="tab-Bakery" class="px-6 py-3 rounded-xl font-semibold text-sm transition-all whitespace-nowrap bg-white text-slate-600 hover:bg-slate-100">Artisan Bakery</button>
+            <button onclick="filterCategory('Dairy')" id="tab-Dairy" class="px-6 py-3 rounded-xl font-semibold text-sm transition-all whitespace-nowrap bg-white text-slate-600 hover:bg-slate-100">Dairy & Eggs</button>
+            <button onclick="filterCategory('Beverages')" id="tab-Beverages" class="px-6 py-3 rounded-xl font-semibold text-sm transition-all whitespace-nowrap bg-white text-slate-600 hover:bg-slate-100">Premium Beverages</button>
+            <button onclick="filterCategory('Pantry')" id="tab-Pantry" class="px-6 py-3 rounded-xl font-semibold text-sm transition-all whitespace-nowrap bg-white text-slate-600 hover:bg-slate-100">Pantry Essentials</button>
         </div>
-        <div class="menu-grid" id="menu-grid">
-            <!-- Items are injected here by JavaScript -->
-        </div>
-    </section>
 
-    <!-- Contact Footer Section -->
-    <footer id="contact">
-        <div class="contact-container">
-            <h3>Contact Us</h3>
-            <p>Have a question or want to book an exclusive table? Reach out to our restaurant manager directly. We look forward to serving you.</p>
-            <a href="tel:+1234567890" class="phone-number">📞 +8801344203633</a>
-            <div class="footer-credits">
-                &copy; 2026 The AZMIR FOOD. Designed to Attract.
+        <!-- Algorithmic Showcase Feed -->
+        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            <!-- Injected completely via programmatic factory generation loop -->
+        </div>
+
+        <!-- Pagination Trigger Box for On-Demand Content Stream -->
+        <div class="mt-16 text-center">
+            <button id="loadMoreBtn" onclick="renderNextBatch()" class="bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 font-semibold px-8 py-4 rounded-xl shadow-sm transition-all inline-flex items-center gap-2">
+                <span>🔄</span> Load More Products (Batch Rendering Optimization)
+            </button>
+        </div>
+    </main>
+
+    <!-- Modern Corporate Footer & Registry -->
+    <footer id="contact" class="bg-slate-900 text-slate-400 pt-20 pb-10 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-12 pb-16 border-b border-slate-800">
+            <div class="space-y-4">
+                <h3 class="text-white text-xl font-bold tracking-tight">APEX<span class="text-emerald-500">MARKET.</span></h3>
+                <p class="text-sm text-slate-400 leading-relaxed">Enterprise web storefront engineered natively to manage massive local product arrays with seamless client-side filtering.</p>
+            </div>
+            <div class="space-y-4">
+                <h4 class="text-white text-sm font-bold uppercase tracking-wider">Corporate Hub Direct</h4>
+                <p class="text-sm">Connect directly to our operations office desk for immediate routing assistance or business inquiries.</p>
+                <a href="tel:+18005550199" class="inline-block text-2xl font-extrabold text-white hover:text-emerald-400 transition-colors tracking-tight">📞 +1 (800) 555-0199</a>
+            </div>
+            <div class="space-y-4">
+                <h4 class="text-white text-sm font-bold uppercase tracking-wider">Operational Integrity</h4>
+                <div class="bg-slate-800 p-4 rounded-xl border border-slate-700/50">
+                    <p class="text-xs text-slate-300 font-medium">🛡️ Secure Encrypted SSL Terminal Active</p>
+                    <p class="text-[11px] text-slate-500 mt-1">Data layers sync fluidly into centralized distributed superstore systems.</p>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
+            <p>&copy; 2026 Apex Market Systems Global. All rights reserved.</p>
+            <div class="flex gap-6">
+                <a href="#" class="hover:text-white transition-colors">Privacy Architecture</a>
+                <a href="#" class="hover:text-white transition-colors">Data Compliance API</a>
             </div>
         </div>
     </footer>
 
-    <!-- JavaScript for Generating 50+ Items and Scroll Animations -->
+    <!-- Algorithmic Initialization Script Matrix -->
     <script>
-        // Sample Base Food Data with high-quality random Unsplash food imagery tokens
-        const baseFoods = [
-            { name: "Truffle Glazed Burger", price: "$18.50", img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=500&q=80", desc: "A premium wagyu patty dripped in black truffle oil, sharp cheddar, and caramelized onions." },
-            { name: "Smoked Salmon Caviar", price: "$24.00", img: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=500&q=80", desc: "Fresh Atlantic smoked salmon served over crispy artisan toast with rich premium caviar." },
-            { name: "Garlic Butter Prawns", price: "$22.00", img: "https://images.unsplash.com/photo-1559742811-822873691df8?auto=format&fit=crop&w=500&q=80", desc: "Plump tiger prawns seared perfectly in rich garlic-infused herb butter and white wine." },
-            { name: "Golden Crisp Avocado Salad", price: "$14.00", img: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=500&q=80", desc: "Organic greens tossed with dynamic citrus dressing, toasted nuts, and crispy avocado wedges." },
-            { name: "Slow-Cooked Ribeye Steak", price: "$32.50", img: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=500&q=80", desc: "A master cut seasoned with rosemary, hickory wood smoked, served with smooth potato purée." },
-            { name: "Artisan Matcha Mousse", price: "$9.50", img: "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&w=500&q=80", desc: "Light, velvety layers of Japanese ceremonial matcha and premium white chocolate whisper sweet tones." },
-            { name: "Wild Mushroom Risotto", price: "$19.00", img: "https://images.unsplash.com/photo-1476124369491-e7addf5db371?auto=format&fit=crop&w=500&q=80", desc: "Creamy arborio rice simmered flawlessly with a rich medley of handpicked forest mushrooms." },
-            { name: "Spiced Berry Waffles", price: "$12.00", img: "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?auto=format&fit=crop&w=500&q=80", desc: "Fluffy Belgian style waffles smothered in mixed berry compote and whipped organic cream." }
-        ];
-
-        const adjectives = ["Premium", "Signature", "Chef's Special", "Classic", "Rustic", "Spiced", "Seared", "Glazed"];
-        
-        const menuGrid = document.getElementById('menu-grid');
-        
-        // Loop to generate 52 dynamic items seamlessly
-        for (let i = 1; i <= 52; i++) {
-            // Pick a template food item randomly
-            const baseFood = baseFoods[(i - 1) % baseFoods.length];
-            const randomAdj = adjectives[Math.floor(Math.random() * adjectives.length)];
-            
-            // Adjust details slightly so they feel like distinct choices
-            const foodName = `${randomAdj} ${baseFood.name}`;
-            const foodPrice = `$${(parseFloat(baseFood.price.replace('$', '')) + (i % 5)).toFixed(2)}`;
-
-            // Create Card Element
-            const card = document.createElement('div');
-            card.className = 'food-card';
-            
-            card.innerHTML = `
-                <div class="food-img-container">
-                    <img src="${baseFood.img}&sig=${i}" alt="${foodName}">
-                </div>
-                <div class="food-info">
-                    <div class="food-header">
-                        <span class="food-name">${foodName}</span>
-                        <span class="food-price">${foodPrice}</span>
-                    </div>
-                    <p class="food-desc">${baseFood.desc} Crafted perfectly to satisfy your cravings.</p>
-                </div>
-            `;
-            
-            menuGrid.appendChild(card);
-        }
-
-        /* --- Scroll Animation Logic --- */
-        // Uses IntersectionObserver to smoothly fade items in one by one as the user scrolls down
-        const cards = document.querySelectorAll('.food-card');
-        
-        const observerOptions = {
-            root: null,
-            threshold: 0.1,
-            rootMargin: "0px 0px -50px 0px"
+        // High-end agency design patterns generate mock assets to simulate 1000 items instantly
+        const baseCategories = ["Produce", "Bakery", "Dairy", "Beverages", "Pantry"];
+        const imageMatrix = {
+            "Produce": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=400&q=80",
+            "Bakery": "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=400&q=80",
+            "Dairy": "https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&w=400&q=80",
+            "Beverages": "https://images.unsplash.com/photo-1527960656-56a509852225?auto=format&fit=crop&w=400&q=80",
+            "Pantry": "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=400&q=80"
+        };
+        const itemsDictionary = {
+            "Produce": ["Organic Honeycrisp Apples", "Hydroponic Crisp Romaine", "Premium Hass Avocados", "Vine-Ripened Heirloom Tomatoes", "Sweet Golden Pineapple"],
+            "Bakery": ["Artisan Sourdough Boule", "Flaky European Croissants", "Whole Grain Brioche Loaf", "Gluten-Free Almond Muffins", "Ancient Grain Baguettes"],
+            "Dairy": ["Grass-Fed Whole Milk", "Organic Salted Creamery Butter", "Aged Sharp Cheddar Block", "Greek Probiotic Yogurt", "Free-Range Pastured Eggs"],
+            "Beverages": ["Cold-Brew Nitro Coffee", "Sparkling Spring Water", "Antioxidant Pomegranate Juice", "Organic Emerald Green Tea", "Premium Craft Ginger Beer"],
+            "Pantry": ["Cold-Pressed Virgin Olive Oil", "Himalayan Pink Sea Salt", "Organic Quinoa Grain Bag", "Raw Wildflower Honey Honey", "Aromatic Basmati Rice Pack"]
         };
 
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if(entry.isIntersecting){
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target); // Stop observing once animated
-                }
-            });
-        }, observerOptions);
+        // Complete Client-Side 1,000 Product Virtual Matrix Data Storage
+        const masterCatalogMemory = [];
+        let virtualCartState = [];
+        let currentFilter = "All";
+        let filteredPool = [];
+        let loadedLimit = 16; // Incremental batch rendering to protect DOM execution speed
 
-        cards.forEach(card => {
-            observer.observe(card);
-        });
+        // Algorithmic Data Generator Factory
+        function initializeEnterpriseCatalog() {
+            for (let i = 1; i <= 1000; i++) {
+                const category = baseCategories[i % baseCategories.length];
+                const pool = itemsDictionary[category];
+                const baseName = pool[i % pool.length];
+                
+                masterCatalogMemory.push({
+                    id: `PROD-${10000 + i}`,
+                    name: `${baseName} (Batch #${Math.ceil(i/5)})`,
+                    category: category,
+                    price: parseFloat((4.99 + (i % 15) + (i * 0.02)).toFixed(2)),
+                    image: `${imageMatrix[category]}&sig=${i}`,
+                    sku: `SKU-${99000 + i}`
+                });
+            }
+            filteredPool = [...masterCatalogMemory];
+        }
+
+        // Optimized DOM Renderer Loop
+        function renderShowcaseGrid() {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = "";
+            
+            const renderSlice = filteredPool.slice(0, loadedLimit);
+            
+            if (renderSlice.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-12 text-slate-400 font-medium">No inventory items match your explicit structural search metrics.</div>`;
+                document.getElementById('loadMoreBtn').style.display = 'none';
+                return;
+            }
+
+            renderSlice.forEach(product => {
+                const card = document.createElement('div');
+                card.className = "product-card bg-white border border-slate-100 rounded-2xl p-4 flex flex-col justify-between relative";
+                card.innerHTML = `
+                    <div>
+                        <div class="w-full h-44 rounded-xl overflow-hidden bg-slate-100 relative mb-4">
+                            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover transition-transform duration-500 hover:scale-110" loading="lazy">
+                            <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-[10px] font-bold text-slate-700 px-2.5 py-1 rounded-md tracking-wider uppercase shadow-sm">${product.category}</span>
+                        </div>
+                        <p class="text-[11px] font-bold text-slate-400 tracking-wide mb-1">${product.sku}</p>
+                        <h4 class="font-bold text-slate-900 text-base leading-snug line-clamp-2 mb-2">${product.name}</h4>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-slate-50 flex items-center justify-between">
+                        <span class="text-xl font-black text-slate-900">$${product.price.toFixed(2)}</span>
+                        <button onclick="addToCart('${product.id}')" class="bg-slate-50 hover:bg-emerald-600 group text-slate-700 hover:text-white px-4 py-2.5 rounded-xl font-bold text-xs transition-all flex items-center gap-1">
+                            Add <span class="group-hover:scale-125 transition-transform">+</span>
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+
+            // Handle load more visibility metrics
+            document.getElementById('loadMoreBtn').style.display = loadedLimit >= filteredPool.length ? 'none' : 'inline-flex';
+        }
+
+        // Client-side Algorithmic Filtering Pipeline
+        function filterCategory(categoryName) {
+            currentFilter = categoryName;
+            
+            // UI Tab active updates
+            const tabs = document.querySelectorAll('#categoryTabs button');
+            tabs.forEach(t => {
+                t.className = "px-6 py-3 rounded-xl font-semibold text-sm transition-all whitespace-nowrap bg-white text-slate-600 hover:bg-slate-100";
+            });
+            document.getElementById(`tab-${categoryName}`).className = "px-6 py-3 rounded-xl font-semibold text-sm transition-all whitespace-nowrap bg-emerald-600 text-white shadow-lg shadow-emerald-600/10";
+
+            executeAlgorithmicSearch();
+        }
+
+        // Combined Search Engine & Query Pipeline
+        function executeAlgorithmicSearch() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            
+            filteredPool = masterCatalogMemory.filter(item => {
+                const matchesCategory = currentFilter === "All" || item.category === currentFilter;
+                const matchesSearch = item.name.toLowerCase().includes(query) || item.sku.toLowerCase().includes(query);
+                return matchesCategory && matchesSearch;
+            });
+
+            loadedLimit = 16; // Reset page boundaries on state transition
+            renderShowcaseGrid();
+        }
+
+        function renderNextBatch() {
+            loadedLimit += 16;
+            renderShowcaseGrid();
+        }
+
+        // Enterprise Cart State Engine
+        function toggleCart() {
+            document.getElementById('cartDrawer').classList.toggle('translate-x-full');
+        }
+
+        function addToCart(productId) {
+            const product = masterCatalogMemory.find(p => p.id === productId);
+            const activeItem = virtualCartState.find(item => item.id === productId);
+
+            if (activeItem) {
+                activeItem.quantity += 1;
+            } else {
+                virtualCartState.push({ ...product, quantity: 1 });
+            }
+            updateCartStateUI();
+        }
+
+        function mutateCartQty(productId, adjustment) {
+            const targetItem = virtualCartState.find(item => item.id === productId);
+            if (!targetItem) return;
+
+            targetItem.quantity += adjustment;
+            if (targetItem.quantity <= 0) {
+                virtualCartState = virtualCartState.filter(item => item.id !== productId);
+            }
+            updateCartStateUI();
+        }
+
+        function updateCartStateUI() {
+            const container = document.getElementById('cartItemsContainer');
+            container.innerHTML = "";
+
+            let absoluteTotal = 0;
+            let completeUnits = 0;
+
+            virtualCartState.forEach(item => {
+                absoluteTotal += item.price * item.quantity;
+                completeUnits += item.quantity;
+
+                const itemRow = document.createElement('div');
+                itemRow.className = "flex items-center gap-4 bg-slate-50 p-3 rounded-xl border border-slate-100";
+                itemRow.innerHTML = `
+                    <img src="${item.image}" class="w-12 h-12 rounded-lg object-cover bg-white">
+                    <div class="flex-1">
+                        <h5 class="font-bold text-xs text-slate-900 truncate max-w-[180px]">${item.name}</h5>
+                        <p class="text-xs font-semibold text-emerald-600 mt-0.5">$${item.price.toFixed(2)}</p>
+                    </div>
+                    <div class="flex items-center gap-2 bg-white rounded-lg border border-slate-200 p-1">
+                        <button onclick="mutateCartQty('${item.id}', -1)" class="w-6 h-6 flex items-center justify-center text-slate-500 font-bold text-xs hover:bg-slate-50 rounded">-</button>
+                        <span class="text-xs font-bold text-slate-800 px-1">${item.quantity}</span>
+                        <button onclick="mutateCartQty('${item.id}', 1)" class="w-6 h-6 flex items-center justify-center text-slate-500 font-bold text-xs hover:bg-slate-50 rounded">+</button>
+                    </div>
+                `;
+                container.appendChild(itemRow);
+            });
+
+            if (virtualCartState.length === 0) {
+                container.innerHTML = `<div class="text-center py-12 text-slate-400 text-sm font-medium">Your interactive cart system is vacant.</div>`;
+            }
+
+            // Sync dynamic value counters across elements
+            document.getElementById('cartCountGlobal').innerText = completeUnits;
+            document.getElementById('cartBadge').innerText = completeUnits;
+            document.getElementById('cartTotalValue').innerText = `$${absoluteTotal.toFixed(2)}`;
+        }
+
+        // Structural Engine Kickoff
+        window.onload = () => {
+            initializeEnterpriseCatalog();
+            renderShowcaseGrid();
+        };
     </script>
 </body>
 </html>
